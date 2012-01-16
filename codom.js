@@ -14,8 +14,16 @@ var root = this;
 var prevCo = root.co;
 var co = Codom;
 
-root.co = co;
-root.Codom = Codom;
+// node.js support
+if (typeof exports !== 'undefined') {
+  if (typeof module !== 'undefined' && module.exports)
+    exports = module.exports = co;
+  exports.co = co;
+} else {
+// browser support
+  root.co = co;
+  root.Codom = Codom;
+}
 
 // internal map implementation
 co._map = function(d, fn) {
@@ -49,9 +57,24 @@ co.attrs = function(attrs) {
 }
 
 //===----------------------------------------------------------------------===//
-// node1
+// split
 //===----------------------------------------------------------------------===//
-co.node1 = function(node, attrs) {
+co.split = function(node) {
+  var hasId = co._contains(node, "#");
+  var hasClass = co._contains(node, ".");
+
+  if (hasId)
+    return node.split("#")[0];
+  else if (hasClass)
+    return node.split(".")[0];
+
+  return node;
+}
+
+//===----------------------------------------------------------------------===//
+// split1
+//===----------------------------------------------------------------------===//
+co.split1 = function(node, attrs) {
   var hasId = co._contains(node, "#");
   var hasClass = co._contains(node, ".");
 
@@ -72,9 +95,17 @@ co.node1 = function(node, attrs) {
     node = split[0];
   }
 
+  return node;
+}
+
+//===----------------------------------------------------------------------===//
+// node1
+//===----------------------------------------------------------------------===//
+co.node1 = function(node, attrs) {
+  attrs = attrs || {};
+  node = co.split1(node, attrs);
   var strAttrs = co.attrs(attrs);
-  console.log(strAttrs);
-  return "<" + node + " " + strAttrs + ">";
+  return "<" + node + (strAttrs?" ":"") + strAttrs + ">";
 }
 
 //===----------------------------------------------------------------------===//
@@ -85,7 +116,9 @@ co.node = function(node, attrs, text) {
     text = attrs;
     attrs = {};
   }
-  return co.node1(node, attrs) + (text || "") + "</" + node + ">";
+  attrs = attrs || {};
+  var actualNode = co.split(node);
+  return co.node1(node, attrs) + (text || "") + "</" + actualNode + ">";
 }
 
 })();
