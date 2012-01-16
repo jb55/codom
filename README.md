@@ -31,14 +31,14 @@ function row(columnRenderers, data) {
     var field = fn(data);
     return co.node('td', { id: 'column' + n }, field);
   }).join("");
-  return a.node('tr', {}, rows);
+  return co.node('tr', {}, rows);
 }
 
 function table(meta) {
   var rows = meta.rowData.map(function(rowData){
     return row(meta.renderers, rowData);
   }).join("");
-  return a.node("table", { id: "myTable" }, rows);
+  return co.node("table", { id: "myTable" }, rows);
 }
 ``` 
 
