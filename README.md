@@ -26,12 +26,9 @@ Easily build abstractions!
 ```js
 function row(columnRenderers, data) {
   var n = 0;
-  var rows = columnRenderers.map(function(fn){
-    ++n;
-    var field = fn(data);
-    return co.node('td', { id: 'column' + n }, field);
-  }).join("");
-  return co.node('tr', {}, rows);
+  return co.node('tr', {}, columnRenderers.map(function(fn){
+    return co.node('td', { id: 'column' + (++n) }, fn(data));
+  }).join(""));
 }
 
 function table(meta) {
