@@ -60,14 +60,11 @@ co.attrs = function(attrs) {
 // split
 //===----------------------------------------------------------------------===//
 co.split = function(node) {
-  var hasId = co._contains(node, "#");
-  var hasClass = co._contains(node, ".");
-
-  if (hasId)
-    return node.split("#")[0];
-  else if (hasClass)
-    return node.split(".")[0];
-
+  var ind;
+  if ((ind = node.indexOf("#")) !== -1)
+    return node.substring(0, ind)
+  else if ((ind = node.indexOf(".")) !== -1)
+    return node.substring(0, ind);
   return node;
 }
 
