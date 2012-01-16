@@ -29,7 +29,7 @@ function row(columnRenderers, data) {
   var rows = columnRenderers.map(function(fn){
     ++n;
     var field = fn(data);
-    return co.node('td', { class: 'column' + n }, field);
+    return co.node('td', { id: 'column' + n }, field);
   }).join("");
   return a.node('tr', {}, rows);
 }
