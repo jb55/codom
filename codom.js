@@ -27,6 +27,11 @@ co._map = function(d, fn) {
   return a;
 }
 
+co._contains = function(s, find) {
+  return s.indexOf(find) !== -1;
+}
+
+
 //===----------------------------------------------------------------------===//
 // noConflict
 //===----------------------------------------------------------------------===//
@@ -39,8 +44,7 @@ co.noConflict = function(){
 //===----------------------------------------------------------------------===//
 co.attrs = function(attrs) {
   return co._map(attrs || {}, function(attr, val) {
-    // class is not a valid key and will cause issues in some browsers
-    return (attr == 'className'? 'class': attr) + '="' + val + '"';})
+                                return attr + '="' + val + '"';})
            .join(" ");
 }
 
@@ -48,7 +52,28 @@ co.attrs = function(attrs) {
 // node1
 //===----------------------------------------------------------------------===//
 co.node1 = function(node, attrs) {
+  var hasId = co._contains(node, "#");
+  var hasClass = co._contains(node, ".");
+
+  if (hasId && hasClass) {
+    var split = node.split("#");
+    attrs["id"]    = split[1].split(".")[0];
+    attrs["class"] = node.split(".")[1].split("#")[0];
+    node = split[0];
+  }
+  else if (hasClass) {
+    var split = node.split(".");
+    attrs["class"] = split[1];
+    node = split[0];
+  }
+  else if (hasId) {
+    var split = node.split("#");
+    attrs["id"] = split[1];
+    node = split[0];
+  }
+
   var strAttrs = co.attrs(attrs);
+  console.log(strAttrs);
   return "<" + node + " " + strAttrs + ">";
 }
 
@@ -56,6 +81,10 @@ co.node1 = function(node, attrs) {
 // node
 //===----------------------------------------------------------------------===//
 co.node = function(node, attrs, text) {
+  if (typeof attrs === 'string') {
+    text = attrs;
+    attrs = {};
+  }
   return co.node1(node, attrs) + (text || "") + "</" + node + ">";
 }
 
