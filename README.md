@@ -7,16 +7,16 @@ You probably won't use 2 of them.
 ## Getting started
 
 ```js
-var stuff = co.node('div.content',
-              co.node('a.linkclass', { href: 'http://google.com' },
+var stuff = co.node('div#content',
+              co.node('a#google.linkclass', { href: 'http://google.com' },
                 "google!"));
 ```
 
 stuff is a string:
 
 ```html
-<div class="content">
-  <a class="linkclass" href="http://google.com">google!</a>
+<div id="content">
+  <a class="linkclass" id="google" href="http://google.com">google!</a>
 </div>
 ```
 
