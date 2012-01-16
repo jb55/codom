@@ -1,0 +1,17 @@
+{
+  "author": "Bill Casarin <bill@casarin.ca> (jb55.com)",
+  "name": "codom",
+  "description": "Mini functional templating",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jb55/codom.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jb55/codom.js.git"
+  },
+  "main": "codom.js",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
