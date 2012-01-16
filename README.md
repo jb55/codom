@@ -3,6 +3,17 @@
 
 Codom is a mini functional templating engine.
 
+## Installing
+
+### Node.js
+
+    npm install codom
+
+### Browser
+
+Codom functions are accessible on the `co` object. You can call `Codom.noConflict`
+to restore existing objects bound to `co`.
+
 ## Getting started
 
 ```js
