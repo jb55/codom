@@ -1,7 +1,7 @@
 
 # Codom - mini functional templating
 
-Codom is a mini functional templating engine there are only 3 functions
+Codom is a mini functional templating engine. There are only 3 functions.
 
 ## Getting started
 
