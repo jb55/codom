@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/jb55/codom.js.png)](http://travis-ci.org/jb55/codom.js)
 
 # Codom - mini functional templating
 
