@@ -1,0 +1,14 @@
+{
+  "name": "codom",
+  "repo": "jb55/codom",
+  "description": "Mini functional templating",
+  "version": "0.0.1",
+  "keywords": ["template", "templating", "templates"],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "main": "codom.js",
+  "scripts": [
+    "codom.js"
+  ]
+}
